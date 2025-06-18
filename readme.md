@@ -26,5 +26,16 @@ movies{
     string Id_actor FK
     string Id_director FK
 }
+booking{
+    string id PK
+    string id_user FK
+    date choose_date
+    date choose_time
+    string seat_choose
+    enum method "Gopay,DANA,MANDIRI"
+    string location
+    int total
+    string id_movie FK
+}
 
 ```
