@@ -2,6 +2,9 @@
 
 ```mermaid
 erDiagram
+direction LR
+users ||--o{ booking : memiliki
+movies ||--o{ booking : dipesan
 
 users{
     string id PK
