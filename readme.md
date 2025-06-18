@@ -13,5 +13,18 @@ users{
     enum role "users,admin"
     timestamp created_at
 }
+movies{
+    string id PK
+    string title
+    string sinopsis
+    string background
+    string poster
+    timestamp release_date
+    int duration
+    int price
+    string Id_genre FK
+    string Id_actor FK
+    string Id_director FK
+}
 
 ```
