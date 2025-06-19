@@ -17,8 +17,6 @@ direction LR
     %% MOVIES dan DIRECTORS (many-to-many)
     movies ||--o{ movie_director : directed_by
     directors ||--o{ movie_director : directs
-
-
     movies ||--o{ movie_actors : includes
     actors ||--o{ movie_actors : acts_in
     users {
