@@ -4,9 +4,9 @@
 erDiagram
 direction LR
     users ||--o{ transactions : makes
-
+    users ||--o{ session: make
     transactions ||--o{ transaction_detail : contains
-    transactions ||--o{ history_transaction : contains
+    transactions ||--o{ history_transac tion : contains
 
     movies ||--o{ transactions : involved_in
 
@@ -30,6 +30,13 @@ direction LR
         string password
         enum role "users,admin"
         timestamp created_at
+    }
+    session{
+        string id PK
+        string token
+        timestamp created_at
+        string id_users FK
+
     }
 
     movies {
