@@ -6,7 +6,7 @@ direction LR
     users ||--o{ transactions : makes
     users ||--o{ session: make
     transactions ||--o{ transaction_detail : contains
-    transactions ||--o{ history_transac tion : contains
+    transactions ||--o{ history_transaction : contains
 
     movies ||--o{ transactions : involved_in
 
@@ -14,7 +14,6 @@ direction LR
     movies ||--o{ movie_genre : categorized_as
     genres ||--o{ movie_genre : classifies
 
-    %% MOVIES dan DIRECTORS (many-to-many)
     movies ||--o{ movie_director : directed_by
     directors ||--o{ movie_director : directs
     movies ||--o{ movie_actors : includes
