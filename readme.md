@@ -2,12 +2,13 @@
 
 ```mermaid
 erDiagram
-    users ||--o{ bookings : has
-    movies ||--o{ bookings : has
+    users ||--o{ transactions : has
+    movies ||--o{ transactions : has
     genres ||--o{ movies : has
     directors ||--o{ movies : directs
     actors ||--o{ movie_actors : acts
     movies ||--o{ movie_actors : has
+    transactions || --o{ transaction_detail :has
 
     users {
         string id PK
@@ -33,15 +34,20 @@ erDiagram
         string director_id FK
     }
 
-    bookings {
+    transactions {
         string id PK
-        datetime show_time
-        string seat_selected
-        enum payment_method "Gopay,DANA,MANDIRI"
+        datetime time
         string location
         int total
         string user_id FK
         string movie_id FK
+    }
+    transaction_detail{
+        string id PK
+        string id_transaction FK
+        string payment
+        string seat
+
     }
 
     directors {
