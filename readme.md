@@ -2,14 +2,25 @@
 
 ```mermaid
 erDiagram
-    users ||--o{ transactions : has
-    movies ||--o{ transactions : has
-    genres ||--o{ movies : has
-    directors ||--o{ movies : directs
-    actors ||--o{ movie_actors : acts
-    movies ||--o{ movie_actors : has
-    transactions || --o{ transaction_detail :has
+direction LR
+    users ||--o{ transactions : makes
 
+    transactions ||--o{ transaction_detail : contains
+    transactions ||--o{ history_transaction : contains
+
+    movies ||--o{ transactions : involved_in
+
+
+    movies ||--o{ movie_genre : categorized_as
+    genres ||--o{ movie_genre : classifies
+
+    %% MOVIES dan DIRECTORS (many-to-many)
+    movies ||--o{ movie_director : directed_by
+    directors ||--o{ movie_director : directs
+
+
+    movies ||--o{ movie_actors : includes
+    actors ||--o{ movie_actors : acts_in
     users {
         string id PK
         string name
@@ -22,7 +33,7 @@ erDiagram
     }
 
     movies {
-        string id PK
+        string id PK "index"
         string title
         string synopsis
         string background
@@ -30,15 +41,15 @@ erDiagram
         timestamp release_date
         int duration
         int price
-        string genre_id FK
-        string director_id FK
+
     }
 
     transactions {
         string id PK
-        datetime time
-        string location
-        int total
+        timestamp time
+        timpstamp date
+        string cinema
+        int price_total
         string user_id FK
         string movie_id FK
     }
@@ -70,6 +81,22 @@ erDiagram
         string movie_id FK
         string actor_id FK
     }
-
+      movie_genre {
+        string id PK
+        string movie_id FK
+        string genre_id FK
+    }
+      movie_director {
+        string id PK
+        string movie_id FK
+        string director_id FK
+    }
+     history_transaction{   string id PK
+        string transaction_id FK
+        enum status "pending,paid"
+        string updated_by
+        timestamp updated_at
+        string note
+    }
 
 ```
