@@ -60,7 +60,9 @@ direction LR
     transaction_detail{
         string id PK
         string id_transaction FK
-        string payment
+        string costumer_name
+        string costumer_phone
+        string payment_method
         string seat
 
     }

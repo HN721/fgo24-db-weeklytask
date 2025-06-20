@@ -9,6 +9,13 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE sessions (
+    id VARCHAR(36) PRIMARY KEY,
+    token TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_users VARCHAR(36) REFERENCES users (id) ON DELETE CASCADE
+);
+
 CREATE TABLE genres (
     id VARCHAR(36) PRIMARY KEY,
     name VARCHAR(50) NOT NULL
@@ -67,6 +74,9 @@ CREATE TABLE transaction_detail (
     id VARCHAR(36) PRIMARY KEY,
     id_transaction VARCHAR(36) REFERENCES transactions (id) ON DELETE CASCADE,
     payment VARCHAR(50) NOT NULL,
+    costumer_name VARCHAR(100) NOT NULL,
+    costumer_phone VARCHAR(20),
+    payment_method VARCHAR(50),
     seat VARCHAR(10) NOT NULL
 );
 
