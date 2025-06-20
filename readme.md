@@ -25,7 +25,7 @@ direction LR
         string profile_image
         string email
         string password
-        enum role "users,admin"
+        string role
         timestamp created_at
     }
     session{
@@ -99,7 +99,7 @@ direction LR
     }
      history_transaction{   string id PK
         string transaction_id FK
-        enum status "pending,paid"
+        string status
         string updated_by
         timestamp updated_at
         string note

@@ -5,7 +5,7 @@ CREATE TABLE users (
     profile_image VARCHAR(255),
     email VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(20) CHECK (role IN ('users', 'admin')) NOT NULL,
+    role VARCHAR(20) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -80,10 +80,12 @@ CREATE TABLE transaction_detail (
     seat VARCHAR(10) NOT NULL
 );
 
+ALTER TABLE transaction_detail DROP COLUMN payment;
+
 CREATE TABLE history_transaction (
     id VARCHAR(36) PRIMARY KEY,
     transaction_id VARCHAR(36) REFERENCES transactions (id) ON DELETE CASCADE,
-    status VARCHAR(20) CHECK (status IN ('pending', 'paid')) NOT NULL,
+    status VARCHAR(20) NOT NULL,
     updated_by VARCHAR(50),
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     note TEXT

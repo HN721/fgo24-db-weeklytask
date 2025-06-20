@@ -43,7 +43,8 @@ VALUES (
         'nanda@gmail.com',
         '1224345',
         'users'
-    ) (
+    ),
+    (
         'u-005',
         'Mas asa',
         '0811112',
@@ -136,23 +137,31 @@ VALUES (
         'm-001'
     );
 
+DELETE FROM transaction_detail WHERE costumer_name = 'hosea';
+
 INSERT INTO
     transaction_detail (
         id,
         id_transaction,
-        payment,
+        costumer_name,
+        costumer_phone,
+        payment_method,
         seat
     )
 VALUES (
         'td-001',
         't-001',
-        'Credit Card',
+        'hosea',
+        '081411110',
+        'Gopay',
         'A1'
     ),
     (
         'td-002',
         't-001',
-        'Credit Card',
+        'hosea',
+        '081411110',
+        'Gopay',
         'A2'
     );
 
@@ -171,3 +180,7 @@ VALUES (
         'u-001',
         'Payment confirmed by admin'
     );
+
+SELECT * FROM transactions;
+
+SELECT * FROM transaction_detail
