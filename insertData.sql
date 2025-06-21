@@ -1,3 +1,4 @@
+-- Active: 1750082338800@@127.0.0.1@5432@postgres
 INSERT INTO
     users (
         id,
@@ -104,6 +105,36 @@ VALUES (
         '2019-07-26 00:00:00',
         161,
         55000
+    ),
+    (
+        'm-003',
+        'Once  in Hollywood',
+        'An actor and stunt double...',
+        'bg2.jpg',
+        'poster2.jpg',
+        '2019-07-26 00:00:00',
+        161,
+        55000
+    ),
+    (
+        'm-004',
+        'Osean',
+        'An actor and stunt double...',
+        'bg2.jpg',
+        'poster2.jpg',
+        '2019-07-26 00:00:00',
+        161,
+        55000
+    ),
+    (
+        'm-005',
+        'O Hollywood',
+        'An actor and stunt double...',
+        'bg2.jpg',
+        'poster2.jpg',
+        '2019-07-26 00:00:00',
+        161,
+        55000
     );
 
 INSERT INTO
@@ -118,23 +149,59 @@ VALUES ('ma-001', 'm-001', 'a-003'),
     ('ma-003', 'm-002', 'a-002');
 
 INSERT INTO
+    cinema (id, name)
+VALUES ('c-001', 'Cinepolis'),
+    ('c-002', 'CGV'),
+    ('c-003', 'XX1'),
+    ('c-004', 'Icon Walk XXI');
+
+INSERT INTO
+    payment_method (id, name)
+VALUES ('p-001', 'Go-Pay'),
+    ('p-002', 'Dana'),
+    ('p-003', 'BRI'),
+    ('p-004', 'PayPal');
+
+INSERT INTO
     transactions (
         id,
         time,
         date,
-        cinema,
+        id_cinema,
+        id_payment_method,
         price_total,
         user_id,
         movie_id
     )
 VALUES (
-        't-001',
+        't-006',
         '2025-06-19 15:30:00',
         '2025-06-19 00:00:00',
-        'MOVXTAR XXI',
+        'c-001',
+        'p-001',
         100000,
         'u-002',
         'm-001'
+    ),
+    (
+        't-002',
+        '2025-06-19 15:30:00',
+        '2025-06-19 00:00:00',
+        'c-002',
+        'p-004',
+        100000,
+        'u-002',
+        'm-001'
+    ),
+    (
+        't-004',
+        '2025-06-19 15:30:00',
+        '2025-06-19 00:00:00',
+        'c-003',
+        'p-001',
+        100000,
+        'u-001',
+        'm-003'
     );
 
 DELETE FROM transaction_detail WHERE costumer_name = 'hosea';
@@ -145,23 +212,27 @@ INSERT INTO
         id_transaction,
         costumer_name,
         costumer_phone,
-        payment_method,
         seat
     )
 VALUES (
         'td-001',
-        't-001',
+        't-002',
         'hosea',
         '081411110',
-        'Gopay',
         'A1'
     ),
     (
         'td-002',
-        't-001',
+        't-006',
         'hosea',
         '081411110',
-        'Gopay',
+        'A2'
+    ),
+    (
+        'td-003',
+        't-004',
+        'hosea',
+        '081411110',
         'A2'
     );
 
@@ -175,12 +246,28 @@ INSERT INTO
     )
 VALUES (
         'ht-001',
-        't-001',
+        't-006',
         'paid',
-        'u-001',
+        'admin',
+        'Payment confirmed by admin'
+    ),
+    (
+        'ht-002',
+        't-002',
+        'paid',
+        'admin',
+        'Payment confirmed by admin'
+    ),
+    (
+        'ht-003',
+        't-004',
+        'paid',
+        'admin',
         'Payment confirmed by admin'
     );
 
 SELECT * FROM transactions;
 
-SELECT * FROM transaction_detail
+SELECT * FROM transaction_detail;
+
+SELECT * FROM history_transaction;

@@ -1,3 +1,4 @@
+-- Active: 1750082338800@@127.0.0.1@5432@postgres
 CREATE TABLE users (
     id VARCHAR(36) PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -70,6 +71,14 @@ CREATE TABLE transactions (
     movie_id VARCHAR(36) REFERENCES movies (id) ON DELETE SET NULL
 );
 
+DROP TABLE transactions DROP cinema;
+
+ALTER TABLE transactions
+ADD COLUMN id_cinema VARCHAR(39),
+ADD COLUMN id_payment_method VARCHAR(39),
+ADD CONSTRAINT fk_cinema FOREIGN KEY (id_cinema) REFERENCES cinema (id),
+ADD CONSTRAINT fk_payment_method FOREIGN KEY (id_payment_method) REFERENCES payment_method (id);
+
 CREATE TABLE transaction_detail (
     id VARCHAR(36) PRIMARY KEY,
     id_transaction VARCHAR(36) REFERENCES transactions (id) ON DELETE CASCADE,
@@ -80,7 +89,13 @@ CREATE TABLE transaction_detail (
     seat VARCHAR(10) NOT NULL
 );
 
+ALTER TABLE transaction_detail DROP COLUMN payment_method;
+
 ALTER TABLE transaction_detail DROP COLUMN payment;
+
+SELECT * FROM transaction_detail;
+
+SELECT * FROM transactions;
 
 CREATE TABLE history_transaction (
     id VARCHAR(36) PRIMARY KEY,
@@ -90,3 +105,13 @@ CREATE TABLE history_transaction (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     note TEXT
 );
+
+CREATE TABLE cinema (
+    id VARCHAR(39) PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE payment_method (
+    id VARCHAR(39) PRIMARY KEY,
+    name VARCHAR(50)
+)
