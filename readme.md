@@ -7,7 +7,8 @@ direction LR
     users ||--o{ session: make
     transactions ||--o{ transaction_detail : contains
     transactions ||--o{ history_transaction : contains
-
+    transactions ||--o{ cinema : contains
+    transactions ||--o{ payment_method :containes
     movies ||--o{ transactions : involved_in
 
 
@@ -51,18 +52,18 @@ direction LR
     transactions {
         string id PK
         timestamp time
-        timpstamp date
-        string cinema
+        date date_booking
         int price_total
-        string user_id FK
-        string movie_id FK
+        string id_cinema FK
+        string id_payment_method FK
+        string id_user FK
+        string mid_ovie FK
     }
     transaction_detail{
         string id PK
         string id_transaction FK
         string costumer_name
         string costumer_phone
-        string payment_method
         string seat
 
     }
@@ -84,25 +85,33 @@ direction LR
 
     movie_actors {
         string id PK
-        string movie_id FK
-        string actor_id FK
+        string id_movie FK
+        string id_actor FK
     }
       movie_genre {
         string id PK
-        string movie_id FK
-        string genre_id FK
+        string id_movie FK
+        string id_genre FK
     }
       movie_director {
         string id PK
-        string movie_id FK
-        string director_id FK
+        string id_movie FK
+        string id_director FK
     }
      history_transaction{   string id PK
-        string transaction_id FK
+        string id_transaction FK
         string status
         string updated_by
         timestamp updated_at
         string note
+    }
+    cinema{
+        string ID PK
+        string name
+    }
+    payment_method{
+        string ID PK
+        string name
     }
 
 ```
