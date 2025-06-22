@@ -271,3 +271,329 @@ SELECT * FROM transactions;
 SELECT * FROM transaction_detail;
 
 SELECT * FROM history_transaction;
+
+-- Update data
+INSERT INTO
+    users (
+        id,
+        name,
+        phone_number,
+        profile_image,
+        email,
+        password,
+        role
+    )
+VALUES (
+        'u-006',
+        'Dina Ayu',
+        '081234511111',
+        'profile6.jpg',
+        'dina@gmail.com',
+        'pwd6',
+        'users'
+    ),
+    (
+        'u-007',
+        'Riko Maulana',
+        '082234567891',
+        'profile7.jpg',
+        'riko@gmail.com',
+        'pwd7',
+        'users'
+    ),
+    (
+        'u-008',
+        'Sinta Dewi',
+        '083334567892',
+        'profile8.jpg',
+        'sinta@gmail.com',
+        'pwd8',
+        'users'
+    ),
+    (
+        'u-009',
+        'Taufik Hidayat',
+        '084434567893',
+        'profile9.jpg',
+        'taufik@gmail.com',
+        'pwd9',
+        'users'
+    ),
+    (
+        'u-010',
+        'Yuni Permata',
+        '085534567894',
+        'profile10.jpg',
+        'yuni@gmail.com',
+        'pwd10',
+        'users'
+    );
+
+INSERT INTO
+    genres (id, name)
+VALUES ('g-007', 'Sci-Fi'),
+    ('g-008', 'Romance'),
+    ('g-009', 'Adventure'),
+    ('g-010', 'Thriller');
+
+INSERT INTO
+    directors (id, name)
+VALUES ('d-003', 'James Cameron'),
+    ('d-004', 'Steven Spielberg'),
+    ('d-005', 'Patty Jenkins'),
+    ('d-006', 'Zack Snyder'),
+    ('d-007', 'Greta Gerwig'),
+    ('d-008', 'Denis Villeneuve');
+
+INSERT INTO
+    actors (id, name)
+VALUES ('a-004', 'Tom Holland'),
+    ('a-005', 'Emma Watson'),
+    ('a-006', 'Robert Downey Jr.'),
+    ('a-007', 'Gal Gadot'),
+    ('a-008', 'Tom Hanks'),
+    ('a-009', 'Scarlett Johansson'),
+    ('a-010', 'Chris Hemsworth');
+
+INSERT INTO
+    movies (
+        id,
+        title,
+        synopsis,
+        background,
+        poster,
+        release_date,
+        duration,
+        price
+    )
+VALUES (
+        'm-006',
+        'Interstellar',
+        'A space exploration movie.',
+        'bg3.jpg',
+        'poster3.jpg',
+        '2014-11-07',
+        169,
+        60000
+    ),
+    (
+        'm-007',
+        'Titanic',
+        'A romantic disaster film.',
+        'bg4.jpg',
+        'poster4.jpg',
+        '1997-12-19',
+        195,
+        45000
+    ),
+    (
+        'm-008',
+        'Avengers: Endgame',
+        'Superheroes fight to save the universe.',
+        'bg5.jpg',
+        'poster5.jpg',
+        '2019-04-26',
+        181,
+        70000
+    ),
+    (
+        'm-009',
+        'Wonder Woman',
+        'A warrior princess fights for peace.',
+        'bg6.jpg',
+        'poster6.jpg',
+        '2017-06-02',
+        141,
+        50000
+    ),
+    (
+        'm-010',
+        'Barbie',
+        'A fantasy-comedy adventure.',
+        'bg7.jpg',
+        'poster7.jpg',
+        '2023-07-21',
+        114,
+        55000
+    );
+
+INSERT INTO
+    movie_director (id, movie_id, director_id)
+VALUES ('md-003', 'm-003', 'd-003'),
+    ('md-004', 'm-004', 'd-004'),
+    ('md-005', 'm-005', 'd-005'),
+    ('md-006', 'm-006', 'd-006'),
+    ('md-007', 'm-007', 'd-007'),
+    ('md-008', 'm-008', 'd-001'),
+    ('md-009', 'm-009', 'd-005'),
+    ('md-010', 'm-010', 'd-007');
+
+INSERT INTO
+    movie_actors (id, movie_id, actor_id)
+VALUES ('ma-004', 'm-003', 'a-004'),
+    ('ma-005', 'm-004', 'a-005'),
+    ('ma-006', 'm-005', 'a-006'),
+    ('ma-007', 'm-006', 'a-007'),
+    ('ma-008', 'm-007', 'a-008'),
+    ('ma-009', 'm-008', 'a-009'),
+    ('ma-010', 'm-009', 'a-010');
+
+INSERT INTO
+    cinema (id, name)
+VALUES ('c-005', 'Grand Cinema'),
+    ('c-006', 'Blitz Megaplex');
+
+INSERT INTO
+    payment_method (id, name)
+VALUES ('p-005', 'OVO'),
+    ('p-006', 'ShopeePay');
+
+INSERT INTO
+    transactions (
+        id,
+        time,
+        date,
+        id_cinema,
+        id_payment_method,
+        price_total,
+        user_id,
+        movie_id
+    )
+VALUES (
+        't-005',
+        '2025-06-20 17:00:00',
+        '2025-06-20',
+        'c-001',
+        'p-002',
+        55000,
+        'u-006',
+        'm-004'
+    ),
+    (
+        't-007',
+        '2025-06-21 19:00:00',
+        '2025-06-21',
+        'c-002',
+        'p-003',
+        45000,
+        'u-007',
+        'm-005'
+    ),
+    (
+        't-008',
+        '2025-06-22 20:00:00',
+        '2025-06-22',
+        'c-003',
+        'p-001',
+        60000,
+        'u-008',
+        'm-006'
+    ),
+    (
+        't-009',
+        '2025-06-22 21:00:00',
+        '2025-06-22',
+        'c-004',
+        'p-004',
+        70000,
+        'u-009',
+        'm-007'
+    ),
+    (
+        't-010',
+        '2025-06-23 22:00:00',
+        '2025-06-23',
+        'c-001',
+        'p-005',
+        55000,
+        'u-010',
+        'm-008'
+    );
+
+INSERT INTO
+    transaction_detail (
+        id,
+        id_transaction,
+        costumer_name,
+        costumer_phone,
+        seat
+    )
+VALUES (
+        'td-004',
+        't-005',
+        'dina',
+        '081234511111',
+        'A3'
+    ),
+    (
+        'td-005',
+        't-007',
+        'riko',
+        '082234567891',
+        'B1'
+    ),
+    (
+        'td-006',
+        't-008',
+        'sinta',
+        '083334567892',
+        'B2'
+    ),
+    (
+        'td-007',
+        't-009',
+        'taufik',
+        '084434567893',
+        'C1'
+    ),
+    (
+        'td-008',
+        't-010',
+        'yuni',
+        '085534567894',
+        'C2'
+    );
+
+INSERT INTO
+    history_transaction (
+        id,
+        transaction_id,
+        status,
+        updated_by,
+        note
+    )
+VALUES (
+        'ht-004',
+        't-005',
+        'paid',
+        'admin',
+        'Confirmed'
+    ),
+    (
+        'ht-005',
+        't-007',
+        'paid',
+        'admin',
+        'Confirmed'
+    ),
+    (
+        'ht-006',
+        't-008',
+        'paid',
+        'admin',
+        'Confirmed'
+    ),
+    (
+        'ht-007',
+        't-009',
+        'paid',
+        'admin',
+        'Confirmed'
+    ),
+    (
+        'ht-008',
+        't-010',
+        'paid',
+        'admin',
+        'Confirmed'
+    );
