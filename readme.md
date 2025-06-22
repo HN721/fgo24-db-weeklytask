@@ -9,8 +9,8 @@ direction LR
     users ||--o{ session : has
     transactions ||--o{ transaction_detail : contains
     transactions ||--o{ history_transaction : contains
-    transactions }o--|| cinema : held_at
-    transactions }o--|| payment_method : paid_with
+    transactions ||--o{ cinema : held_at
+    transactions ||--o{ payment_method : paid_with
     movies ||--o{ transactions : involved_in
 
     movies ||--o{ movie_genre : categorized_as
