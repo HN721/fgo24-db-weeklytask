@@ -1,22 +1,26 @@
 # ERD DIAGRAM MOVXTAR
 
+This project is a backend database schema for a cinema ticket booking application. It includes user management, movie listings, genre classifications, director and actor mappings, cinema information, transactions, and detailed purchase history.
+
+### 📦 Features
+
 ```mermaid
 erDiagram
 direction LR
-    users ||--o{ transactions : makes
-    users ||--o{ session: make
+   users ||--o{ transactions : makes
+    users ||--o{ session : has
     transactions ||--o{ transaction_detail : contains
     transactions ||--o{ history_transaction : contains
-    transactions ||--o{ cinema : contains
-    transactions ||--o{ payment_method :containes
+    transactions }o--|| cinema : held_at
+    transactions }o--|| payment_method : paid_with
     movies ||--o{ transactions : involved_in
-
 
     movies ||--o{ movie_genre : categorized_as
     genres ||--o{ movie_genre : classifies
 
     movies ||--o{ movie_director : directed_by
     directors ||--o{ movie_director : directs
+
     movies ||--o{ movie_actors : includes
     actors ||--o{ movie_actors : acts_in
     users {
@@ -57,7 +61,7 @@ direction LR
         string id_cinema FK
         string id_payment_method FK
         string id_user FK
-        string mid_ovie FK
+        string id_movie FK
     }
     transaction_detail{
         string id PK
