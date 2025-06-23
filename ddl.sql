@@ -10,6 +10,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Tabel sesi pengguna
 CREATE TABLE sessions (
     id VARCHAR(36) PRIMARY KEY,
     token TEXT NOT NULL,
@@ -61,6 +62,16 @@ CREATE TABLE movie_actors (
     actor_id VARCHAR(36) REFERENCES actors (id) ON DELETE CASCADE
 );
 
+CREATE TABLE cinema (
+    id VARCHAR(39) PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE payment_method (
+    id VARCHAR(39) PRIMARY KEY,
+    name VARCHAR(50)
+);
+
 CREATE TABLE transactions (
     id VARCHAR(36) PRIMARY KEY,
     time TIMESTAMP NOT NULL,
@@ -68,34 +79,20 @@ CREATE TABLE transactions (
     cinema VARCHAR(255) NOT NULL,
     price_total INTEGER CHECK (price_total >= 0),
     user_id VARCHAR(36) REFERENCES users (id) ON DELETE SET NULL,
-    movie_id VARCHAR(36) REFERENCES movies (id) ON DELETE SET NULL
+    movie_id VARCHAR(36) REFERENCES movies (id) ON DELETE SET NULL,
+    id_cinema VARCHAR(39),
+    id_payment_method VARCHAR(39),
+    CONSTRAINT fk_cinema FOREIGN KEY (id_cinema) REFERENCES cinema (id),
+    CONSTRAINT fk_payment_method FOREIGN KEY (id_payment_method) REFERENCES payment_method (id)
 );
-
-DROP TABLE transactions DROP cinema;
-
-ALTER TABLE transactions
-ADD COLUMN id_cinema VARCHAR(39),
-ADD COLUMN id_payment_method VARCHAR(39),
-ADD CONSTRAINT fk_cinema FOREIGN KEY (id_cinema) REFERENCES cinema (id),
-ADD CONSTRAINT fk_payment_method FOREIGN KEY (id_payment_method) REFERENCES payment_method (id);
 
 CREATE TABLE transaction_detail (
     id VARCHAR(36) PRIMARY KEY,
     id_transaction VARCHAR(36) REFERENCES transactions (id) ON DELETE CASCADE,
-    payment VARCHAR(50) NOT NULL,
     costumer_name VARCHAR(100) NOT NULL,
     costumer_phone VARCHAR(20),
-    payment_method VARCHAR(50),
     seat VARCHAR(10) NOT NULL
 );
-
-ALTER TABLE transaction_detail DROP COLUMN payment_method;
-
-ALTER TABLE transaction_detail DROP COLUMN payment;
-
-SELECT * FROM transaction_detail;
-
-SELECT * FROM transactions;
 
 CREATE TABLE history_transaction (
     id VARCHAR(36) PRIMARY KEY,
@@ -105,13 +102,3 @@ CREATE TABLE history_transaction (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     note TEXT
 );
-
-CREATE TABLE cinema (
-    id VARCHAR(39) PRIMARY KEY,
-    name VARCHAR(50)
-);
-
-CREATE TABLE payment_method (
-    id VARCHAR(39) PRIMARY KEY,
-    name VARCHAR(50)
-)
